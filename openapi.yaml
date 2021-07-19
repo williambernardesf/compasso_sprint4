@@ -1,0 +1,513 @@
+openapi: 3.0.1
+info:
+  title: "API de Vendas"
+  description: "API para fazer pedidos de produtos, cadastro de pessoas, enderecos."
+  version: "0.0.1"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "williambferreira2002@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+externalDocs:
+    description: "Documentação burocrática"
+    url: "http://swagger.io"
+servers:
+- url : http://localhost:8080/api
+  description: API de Vendas
+paths:
+  /protected/pessoas:
+    get:
+      summary: Recupera todas as pessoas
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pessoas"
+    post:
+      summary: Cria uma nova pessoa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cpf:
+                    type: string
+                  nome:
+                    type: string
+                  salario:
+                    type: integer
+                  sexo:
+                    type: string
+        404:
+          description: Pessoa não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /pessoas/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma pessoa pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pessoas"
+        404:
+          description: Pessoa não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza uma pessoa pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cpf:
+                    type: string
+                  nome:
+                    type: string
+                  salario:
+                    type: integer
+                  sexo:
+                    type: string
+        404:
+          description: Pessoa não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Exclui uma pessoa pelo ID
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        404:
+          description: Pessoa não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+  /protected/enderecos:
+    get:
+      summary: Recupera todos os enderecos
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enderecos"
+    post:
+      summary: Cria um novo endereco
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pais:
+                    type: string
+                  estado:
+                    type: string
+                  cidade:
+                    type: string
+                  cep:
+                    type: string
+                  rua:
+                    type: string
+        404:
+          description: Endereço não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /enderecos/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um endereço pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Enderecos"
+        404:
+          description: Endereco não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza um endereço pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pais:
+                    type: string
+                  estado:
+                    type: string
+                  cidade:
+                    type: string
+                  cep:
+                    type: string
+                  rua:
+                    type: string                  
+        404:
+          description: Endereço não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Exclui um endereço pelo ID
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        404:
+          description: Endereço não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /protected/produtos:
+    get:
+      summary: Recupera todos os produtos
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produtos"
+    post:
+      summary: Cria um novo produto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  descricao:
+                    type: string
+                  preco:
+                    type: integer
+                  status:
+                    type: string
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /produtos/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um produto pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produtos"
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza um produto pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  descricao:
+                    type: string
+                  preco:
+                    type: integer
+                  status:
+                    type: string                  
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Exclui um produto pelo ID
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /protected/pedidos:
+    get:
+      summary: Recupera todos os pedidos
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedidos"
+    post:
+      summary: Cria um novo pedido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                      type: integer
+        404:
+          description: Produto não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  /pedidos/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um pedido pelo ID
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pedidos"
+        404:
+          description: Pedido não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: Atualiza um pedido pelo ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                descricao:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                      type: integer
+        404:
+          description: Pedido não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: Exclui um pedido pelo ID
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        404:
+          description: Pedido não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+  
+
+components:
+  schemas:
+    Pessoa:
+      type: object
+      properties:
+        id:
+          type: integer
+        cpf:
+          type: string
+        nome:
+          type: string
+        salario:
+          type: integer
+        sexo:
+          type: string
+    Pessoas:
+      type: array
+      items:
+        $ref: "#/components/schemas/Pessoa"
+    Endereco:
+      type: object
+      properties:
+        id:
+          type: integer
+        pais:
+          type: string
+        estado:
+          type: string
+        cidade:
+          type: string
+        cep:
+          type: string
+        rua:
+          type: string
+    Enderecos:
+      type: array
+      items:
+        $ref: "#/components/schemas/Endereco"
+    Produto:
+      type: object
+      properties:
+        id:
+          type: integer
+        descricao:
+          type: string
+        preco:
+          type: integer
+        status:
+          type: string
+    Produtos:
+      type: array
+      items:
+        $ref: "#/components/schemas/Produto" 
+    Pedido:
+      type: object
+      properties:
+        total:
+            type: integer
+    Pedidos:
+      type: array
+      items:
+        $ref: "#/components/schemas/Pedido"    
+    
+    
+    
